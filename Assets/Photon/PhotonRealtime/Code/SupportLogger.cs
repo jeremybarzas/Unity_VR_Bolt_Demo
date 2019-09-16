@@ -9,6 +9,8 @@
 // <author>developer@photonengine.com</author>
 // ----------------------------------------------------------------------------
 
+
+
 #if UNITY_4_7 || UNITY_5 || UNITY_5_3_OR_NEWER
 #define SUPPORTED_UNITY
 #endif
@@ -53,7 +55,7 @@ namespace Photon.Realtime
         private LoadBalancingClient client;
 
         private Stopwatch startStopwatch;
-        
+
         private int pingMax;
         private int pingMin;
 
@@ -101,6 +103,25 @@ namespace Photon.Realtime
         }
         #endif
 
+        public void StartLogStats()
+        {
+            #if SUPPORTED_UNITY
+            this.InvokeRepeating("LogStats", 10, 10);
+            #else
+            Debug.Log("Not implemented for non-Unity projects.");
+            #endif
+        }
+
+        public void StopLogStats()
+        {
+            #if SUPPORTED_UNITY
+            this.CancelInvoke("LogStats");
+            #else
+            Debug.Log("Not implemented for non-Unity projects.");
+            #endif
+        }
+
+
         private string GetFormattedTimestamp()
         {
             if (this.startStopwatch == null)
@@ -111,7 +132,7 @@ namespace Photon.Realtime
             return string.Format("[{0}.{1}]", this.startStopwatch.Elapsed.Seconds, this.startStopwatch.Elapsed.Milliseconds);
         }
 
-        
+
         // called via InvokeRepeatedly
         private void TrackValues()
         {
@@ -173,7 +194,7 @@ namespace Photon.Realtime
             {
                 this.client.LoadBalancingPeer.TrafficStatsEnabled = false;
                 this.client.LoadBalancingPeer.TrafficStatsEnabled = true;
-                this.InvokeRepeating("LogStats", 10, 10);
+                this.StartLogStats();
             }
         }
 
@@ -228,7 +249,7 @@ namespace Photon.Realtime
 
 		public void OnDisconnected(DisconnectCause cause)
         {
-            this.CancelInvoke("LogStats");
+            this.StopLogStats();
 
 			Debug.Log(this.GetFormattedTimestamp() + " SupportLogger OnDisconnected(" + cause + ").");
 			this.LogBasics();
@@ -287,7 +308,7 @@ namespace Photon.Realtime
         }
 
 
-        #if !SUPPORTED_UNITY
+#if !SUPPORTED_UNITY
         private static class Debug
         {
             public static void Log(string msg)
@@ -303,6 +324,6 @@ namespace Photon.Realtime
                 System.Diagnostics.Debug.WriteLine(msg);
             }
         }
-        #endif
+#endif
     }
 }

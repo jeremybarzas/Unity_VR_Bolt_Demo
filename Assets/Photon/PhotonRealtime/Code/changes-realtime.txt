@@ -4,13 +4,37 @@ Exit Games GmbH - www.photonengine.com - forum.photonengine.com
 
 
 
-Version 4.1.2.15 (May 2019 - rev)
+Version 4.1.2.17 (9. August 2019 - rev5188)
+    Changed: SupportLogger. Traffic stats are enabled by default. The PhotonHandler no longer has to enable this.
+    Added: Min/max ping to logged statistics. SupportLogger.TrackValues is invoked to keep track of min/max ping for each connection.
+    Fixed: Statistics logging is started on Connect and stopped OnDisconnected().
+    Changed: Callback registration.
+    Changed: All callback target changes are now queued in one queue and executed in order. This avoids cases where our implementation defined if a callback got added or removed, when a target got added and removed.
+    Changed: Duplicate addition and removal is now prevented.
+    Changed: The callback containers now know and use the LoadBalancingClient to update the targets. This means they don't need lists for additions and removals anymore.
+    Changed: Events will now also update the callback targets before executing the event callback.
+    Changed: WebRpcCallbacksContainer is now also a List<i> like the other containers. This is simpler to maintain. The only "custom" callback implementation is that for events. This was an event delegate before and remains one. No change for this.
+    Changed: The callbacks to OnDisconnected(reason). On timeout or exception, there is now only one callback which happens after the client/peer is actually disconnected. The peer's status changes (timeout, etc.) are used to identify the reason but don't cause a callback on their own. Previously, you could run into more than one OnDisconnected call and fail to reconnect in the first one.
+    Changed: There are now fewer calls of OnDisconnected(). Example: A timeout disconnect caused two calls because signalled the timeout and the second signalled when the client locally finished disconnecting. Now, the DisconnectCause stores the reason and there is only one callback.
+    Changed: Internal use of DisconnectCause. It's now set in LBC.Disconnect() and by errors from the Peer. It's reset to "None" before calls to Peer.Connect().
+    Removed: DisconnectCause enum values that were obsolete already. DisconnectByServerUserLimit is now MaxCcuReached. TimeoutDisconnect is now ClientTimeout. DisconnectByServer is now ServerTimeout.
+    Changed: OnStatusChanged() case Disconnect always sets the CurrentRoom to null. It is no longer used to store the roomname from the Master Server to use on the Game Server.
+    Removed: LoadBalancingClient.didAuthenticate, which is no longer needed for the cleaned up logic.
+    Changed: WebRpcResponse.ReturnCode -> ResultCode and WebRpcResponse.DebugMessage -> Message.
+    Changed: AuthenticationValues.ToString() to include more useful info.
+    Changed: Execution order for disconnect on quit. As OnApplicationQuit is followed by OnDisable, PUN now disconnects in OnDisable, if OnApplicationQuit was called previously. This means that you can now send a final message in OnApplicationQuit. It's not guaranteed to arrive anywhere, as the message won't be repeated on loss.
+    Removed: PhotonHandler.OnDestroy which was not needed anymore. OnDisable is also called when the app quits, so it's adequate to tear down the thread there.
+    Removed: Outdated and unused PingMonoEditor.
+    Changed: Random ID for each ping is now truly randomized.
+    Changed: Region pinging result logging. Per region, all rtts are available, as well as a previous summary (if any). Pun gets it via RegionHandler.GetResults().
+
+Version 4.1.2.15 (7. June 2019 - rev5137)
     Added: Options for OpFindFriends to filter which rooms should be returned by the server. The default is the same as before but now the friend list may exclude rooms which are not yet on the game server, invisible, closed (or any combination).
     Added: SimulateConnectionLoss(bool) to simplify testing of connection loss. This uses the built-in network simulation to get a client timeout disconnect.
     Removed: EventExt class, which only contained obsolete methods.
 
 Version 4.1.2.14 (6. May 2019 - rev5097)
-	Changed: Realtime API changes are now listed in a separate changes file.
+    Changed: Realtime API changes are now listed in a separate changes file.
     Updated: Demos to make use of Sender and CustomData.
 
 Version 4.1.2.13 (3. May 2019 - rev5086)
