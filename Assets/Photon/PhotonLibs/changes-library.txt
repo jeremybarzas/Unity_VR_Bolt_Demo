@@ -4,19 +4,27 @@ Exit Games GmbH - www.photonengine.com - forum.photonengine.com
 
 
 
-Version 4.1.2.17 (25. June 2019 - rev5164)
-	Changed: trafficStatsStopwatch initialization. This keeps the Stopwatch but resets it. Also it's started on initialization, if trafficStatsEnabled.
-	Changed: VitalStatsToString() can now return a useful stats string, even if TrafficStatsGameLevel is null (which is never the case currently).
-	Added: VitalStatsToString() now logs the "Longest send" time. This is a new value to debug connections.
+Version 4.1.2.17 (9. August 2019 - rev5187)
+    Removed: Obsolete StatusCode values: DisconnectByServer is now DisconnectByServerTimeout. Other values are simply removed.
+    Updated: Used StatusCode.DisconnectByServer to DisconnectByServerTimeout. A follow up to renaming and removing the code. Some implementations of IPhotonSocket can be in existing projects and may still use the old naming. Simply rename.
+    Changed: PeerBase.timeInt is now a property which calculates the current time: SupportClass.GetTickCount() - this.timeBase.
+    Fixed: The change for timeInt fixes a problem with TCP connections which go entirely silent and would no longer update the PhotonPeer.ConnectionTime.
+
+
+Version 4.1.2.16 (28. June 2019 - rev5168)
+    Changed: TrafficStats Stopwatch initialization. This keeps the Stopwatch but resets it. Also it's started on initialization, if trafficStatsEnabled.
+    Changed: VitalStatsToString() can now return a useful stats string, even if TrafficStatsGameLevel is null (which is never the case currently).
+    Added: VitalStatsToString() now logs the "Longest send" time. This is a new value to debug connections.
+    Changed: NETFX_CORE now also uses Activator.CreateInstance, if a SocketImplementation is set (as in other implementations).
 
 Version 4.1.2.16 (24. June 2019 - rev5154)
-	Fixed: DispatchIncomingCommands() for reliable UDP. In some cases, an unreliable command/message could dispatch before the related reliable command (which was written and sent earlier). This issue was introduced in v4.1.2.11, 15. April 2019.
-	Fixed: Each thread created via SupportClass.StartBackgroundCalls will now try-catch a ThreadAbortException. Apparently the handling of a ThreadAbortException changed with Unity 2019, which started to log the exceptions on Android, IL2CPP, 4.x runtime.
+    Fixed: DispatchIncomingCommands() for reliable UDP. In some cases, an unreliable command/message could dispatch before the related reliable command (which was written and sent earlier). This issue was introduced in v4.1.2.11, 15. April 2019.
+    Fixed: Each thread created via SupportClass.StartBackgroundCalls will now try-catch a ThreadAbortException. Apparently the handling of a ThreadAbortException changed with Unity 2019, which started to log the exceptions on Android, IL2CPP, 4.x runtime.
 
 Version 4.1.2.15 (07. June 2019 - rev5137)
     Changed: Tcp messages with magic byte 0xF4 are no longer accepted (this was used on a deprecated platform).
     Changed: An Internal Operation Response for OpPing is now executed right away, fixing timing problems when using Op Ping (in WSS, e.g. on Xbox).
-    Added: PhotonPeer.InitialResentTimeMax. It guarantees resends for commands, despite bad lag (which may be temporary). 
+    Added: PhotonPeer.InitialResentTimeMax. It guarantees resends for commands, despite bad lag (which may be temporary).
     Changed: NCommand.ToString() for slightly better organization and naming of values. This is mostly a debugging help for the Photonians.
 
 Version 4.1.2.14 (16. May 2019 - rev5128)

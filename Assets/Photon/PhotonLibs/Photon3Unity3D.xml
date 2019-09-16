@@ -173,52 +173,33 @@
             <summary>the PhotonPeer encountered an exception and will disconnect, too.<br/>See {@link PhotonListener#OnStatusChanged}*</summary>
         </member>
         <member name="F:ExitGames.Client.Photon.StatusCode.ExceptionOnConnect">
-            <summary>the PhotonPeer encountered an exception while opening the incoming connection to the server. The server could be down / not running or the client has no network or a misconfigured DNS.<br/>See {@link PhotonListener#OnStatusChanged}*</summary>
+            <summary>Exception while opening the incoming connection to the server. Followed by Disconnect.</summary>
+            <remarks>The server could be down / not running or the client has no network or a misconfigured DNS.<br/>See {@link PhotonListener#OnStatusChanged}*</remarks>
         </member>
         <member name="F:ExitGames.Client.Photon.StatusCode.SecurityExceptionOnConnect">
             <summary>Used on platforms that throw a security exception on connect. Unity3d does this, e.g., if a webplayer build could not fetch a policy-file from a remote server.</summary>
         </member>
-        <member name="F:ExitGames.Client.Photon.StatusCode.QueueOutgoingReliableWarning">
-            <summary>PhotonPeer outgoing queue is filling up. send more often.</summary>
-        </member>
-        <member name="F:ExitGames.Client.Photon.StatusCode.QueueOutgoingUnreliableWarning">
-            <summary>PhotonPeer outgoing queue is filling up. send more often.</summary>
-        </member>
         <member name="F:ExitGames.Client.Photon.StatusCode.SendError">
             <summary>Sending command failed. Either not connected, or the requested channel is bigger than the number of initialized channels.</summary>
         </member>
-        <member name="F:ExitGames.Client.Photon.StatusCode.QueueOutgoingAcksWarning">
-            <summary>PhotonPeer outgoing queue is filling up. send more often.</summary>
-        </member>
-        <member name="F:ExitGames.Client.Photon.StatusCode.QueueIncomingReliableWarning">
-            <summary>PhotonPeer incoming queue is filling up. Dispatch more often.</summary>
-        </member>
-        <member name="F:ExitGames.Client.Photon.StatusCode.QueueIncomingUnreliableWarning">
-            <summary>PhotonPeer incoming queue is filling up. Dispatch more often.</summary>
-        </member>
-        <member name="F:ExitGames.Client.Photon.StatusCode.QueueSentWarning">
-            <summary>PhotonPeer incoming queue is filling up. Dispatch more often.</summary>
-        </member>
         <member name="F:ExitGames.Client.Photon.StatusCode.ExceptionOnReceive">
-            <summary>Exception, if a server cannot be connected. Most likely, the server is not responding. Ask user to try again later.</summary>
+            <summary>Exception, if a server cannot be connected. Followed by Disconnect.</summary>
+            <remarks>Most likely, the server is not responding. Ask user to try again later.</remarks>
         </member>
         <member name="F:ExitGames.Client.Photon.StatusCode.TimeoutDisconnect">
-            <summary>Disconnection due to a timeout (client did no longer receive ACKs from server).</summary>
-        </member>
-        <member name="F:ExitGames.Client.Photon.StatusCode.DisconnectByServer">
-            <summary>Timeout disconnect by server. The server didn't receive necessary ACKs in time.</summary>
+            <summary>Disconnection due to a timeout (client did no longer receive ACKs from server). Followed by Disconnect.</summary>
         </member>
         <member name="F:ExitGames.Client.Photon.StatusCode.DisconnectByServerTimeout">
-            <summary>Timeout disconnect by server. The server didn't receive necessary ACKs in time.</summary>
+            <summary>Timeout disconnect by server. The server didn't receive necessary ACKs in time. Followed by Disconnect.</summary>
         </member>
         <member name="F:ExitGames.Client.Photon.StatusCode.DisconnectByServerUserLimit">
             <summary>Disconnect by server due to concurrent user limit reached (received a disconnect command).</summary>
         </member>
         <member name="F:ExitGames.Client.Photon.StatusCode.DisconnectByServerLogic">
-            <summary>Disconnect by server due to server's logic.</summary>
+            <summary>(1043) Disconnect by server due to server's logic. Followed by Disconnect.</summary>
         </member>
         <member name="F:ExitGames.Client.Photon.StatusCode.DisconnectByServerReasonUnknown">
-            <summary>Disconnect by server due to unspecified reason.</summary>
+            <summary>Disconnect by server due to unspecified reason. Followed by Disconnect.</summary>
         </member>
         <member name="F:ExitGames.Client.Photon.StatusCode.EncryptionEstablished">
             <summary>(1048) Value for OnStatusChanged()-call, when the encryption-setup for secure communication finished successfully.</summary>
