@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if(m_Target == null){
             Debug.Log("No target for the camera to follow.");

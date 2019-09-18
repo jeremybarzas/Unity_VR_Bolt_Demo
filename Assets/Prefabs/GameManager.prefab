@@ -43,7 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4c4f97d0320364ca16f793ae09fe1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerPrefab: {fileID: 1678029118135414942, guid: 9d4cf2d7a75878542bd0e31bd547fc4f,
+  m_playerPrefab: {fileID: 6348835477247504297, guid: 622dc64dca562244a8bd9cf365c5f62b,
+    type: 3}
+  m_playerModel: {fileID: 1678029118135414942, guid: 9d4cf2d7a75878542bd0e31bd547fc4f,
     type: 3}
   m_playerHead: {fileID: 3791124819747385715, guid: 648833203c7a8e44f926e56255a449ac,
     type: 3}
+  m_ball: {fileID: 2545119613278103247, guid: 64fe1f3468be86947a8b688662781e8e, type: 3}
