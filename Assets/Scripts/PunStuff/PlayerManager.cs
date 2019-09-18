@@ -30,11 +30,4 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             transform.position = new Vector3(0f, 0.5f, 0f);
         }
     }
-
-    void Update()
-    {
-        var stick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick) * m_speed * Time.deltaTime;
-
-        s_localPlayerInstance.transform.position += new Vector3(stick.x, 0, stick.y);
-    }
 }

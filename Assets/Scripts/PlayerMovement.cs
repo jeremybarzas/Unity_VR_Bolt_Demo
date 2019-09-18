@@ -15,14 +15,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         // {
         //     PlayerManager.s_localPlayerInstance = this.gameObject;
         // }
-        DontDestroyOnLoad(gameObject);
     }
-
-    private void Start()
-    {
-        playerCamera = FindObjectOfType<Camera>();
-    }
-
+    
     void Update()
     {
         Vector3 stick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick) * Time.deltaTime;
