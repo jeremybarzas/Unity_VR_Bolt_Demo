@@ -17,7 +17,15 @@ public class BallImpact : MonoBehaviour
         if (col.gameObject.CompareTag("terrain"))
             return;
 
+        var veloCalc = col.gameObject.GetComponent<VelocityCalculator>();
+
+        if (veloCalc == null)
+            return;
+        
         var force = col.gameObject.GetComponent<VelocityCalculator>().m_velocity;
-        rb.AddForceAtPosition((force * m_forceMultipler), transform.position, ForceMode.Impulse);
+        force.y = force.y < 0 ? 0 : force.y;
+
+        rb.AddForceAtPosition((force * m_forceMultipler), col.contacts[0].point, ForceMode.Impulse);
+        //rb.AddTorque((force * m_forceMultipler), ForceMode.VelocityChange);
     }
 }
