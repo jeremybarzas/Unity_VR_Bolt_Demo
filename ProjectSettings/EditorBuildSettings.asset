@@ -6,9 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: aa87bb7011b91294ba01a8bd94c43bf3
+    path: Assets/Scenes/Tony-Launcher.unity
+    guid: eec04b22f4ee1c2439dd82b350d0c423
   - enabled: 1
-    path: Assets/Scenes/TheRoom.unity
-    guid: 6e8d05c56352c014d937ee748caa54a0
+    path: Assets/Scenes/Room for 1.unity
+    guid: 63dff4100906e2b4ca669883e5ad5d30
+  - enabled: 1
+    path: Assets/Scenes/Room for 2.unity
+    guid: 633f645df8555d84bb739fe6f9cf2a6e
+  - enabled: 1
+    path: Assets/Scenes/Room for 3.unity
+    guid: bfdb23675f8d66f43b30e573d2d3d76f
+  - enabled: 1
+    path: Assets/Scenes/Room for 4.unity
+    guid: 24f5b404e3ba9c54699bda7f63b9dc27
   m_configObjects: {}
