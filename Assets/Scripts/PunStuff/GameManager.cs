@@ -61,10 +61,10 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
         if(PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.Instantiate(m_ball.name, new Vector3(0, 2, 5), Quaternion.identity);
+            PhotonNetwork.Instantiate(m_ball.name, new Vector3(0, 0, 0), Quaternion.identity);
         }
     }
 
